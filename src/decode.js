@@ -106,7 +106,7 @@ function decodeFromReader (reader, options) {
   let byteLength = 1 // Read single byte chunks until the length is known
   const varByteSource = {
     [Symbol.asyncIterator] () { return this },
-    next: async () => {
+    next: () => {
       return reader.next(byteLength)
         .catch(() => {
           // There was no data left to read, end the iterator
