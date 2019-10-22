@@ -106,16 +106,18 @@ function decodeFromReader (reader, options) {
   let byteLength = 1 // Read single byte chunks until the length is known
   const varByteSource = {
     [Symbol.asyncIterator] () { return this },
-    next: () => {
-      return reader.next(byteLength)
-        .catch(() => {
-          // There was no data left to read, end the iterator
+    next: async () => {
+      try {
+        return await reader.next(byteLength)
+      } catch (err) {
+        if (err.code === 'ERR_UNDER_READ') {
           return { done: true, value: null }
-        })
-        .finally(() => {
-          // Reset the byteLength so we continue to check for varints
-          byteLength = 1
-        })
+        }
+        throw err
+      } finally {
+        // Reset the byteLength so we continue to check for varints
+        byteLength = 1
+      }
     }
   }
 
