@@ -27,4 +27,20 @@ describe('encode.single', () => {
     expect(length).to.equal(input.length)
     expect(output.slice(Varint.decode.bytes)).to.deep.equal(input)
   })
+
+  it('should encode with custom length encoder (int32BE)', async () => {
+    const input = await someBytes()
+
+    const lengthEncoder = (value, target, offset) => {
+      target = target || Buffer.allocUnsafe(4)
+      target.writeInt32BE(value, offset)
+      return target
+    }
+    lengthEncoder.bytes = 4 // Always because fixed length
+
+    const output = lp.encode.single(input, { lengthEncoder })
+
+    const length = output.readInt32BE(0)
+    expect(length).to.equal(input.length)
+  })
 })

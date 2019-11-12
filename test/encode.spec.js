@@ -50,4 +50,26 @@ describe('encode', () => {
       expect(o.slice(Varint.decode.bytes)).to.deep.equal(input[i])
     })
   })
+
+  it('should encode with custom length encoder (int32BE)', async () => {
+    const input = await Promise.all(times(randomInt(1, 100), someBytes))
+
+    const lengthEncoder = (value, target, offset) => {
+      target = target || Buffer.allocUnsafe(4)
+      target.writeInt32BE(value, offset)
+      return target
+    }
+    lengthEncoder.bytes = 4 // Always because fixed length
+
+    const output = await pipe(
+      input,
+      lp.encode({ lengthEncoder }),
+      toBuffer,
+      collect
+    )
+    output.forEach((o, i) => {
+      const length = o.readInt32BE(0)
+      expect(length).to.equal(input[i].length)
+    })
+  })
 })
