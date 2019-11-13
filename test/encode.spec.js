@@ -4,16 +4,13 @@
 const pipe = require('it-pipe')
 const { expect } = require('chai')
 const randomInt = require('random-int')
-const randomBytes = require('random-bytes')
-const { map, collect } = require('streaming-iterables')
+const { collect } = require('streaming-iterables')
 const Varint = require('varint')
+const { toBuffer, times, someBytes } = require('./_helpers')
 
 const lp = require('../')
+const { int32BEEncode } = lp
 const { MIN_POOL_SIZE } = lp.encode
-
-const times = (n, fn) => Array.from(Array(n), fn)
-const someBytes = n => randomBytes(randomInt(1, n || 32))
-const toBuffer = map(c => c.slice())
 
 describe('encode', () => {
   it('should encode length as prefix', async () => {
@@ -53,17 +50,9 @@ describe('encode', () => {
 
   it('should encode with custom length encoder (int32BE)', async () => {
     const input = await Promise.all(times(randomInt(1, 100), someBytes))
-
-    const lengthEncoder = (value, target, offset) => {
-      target = target || Buffer.allocUnsafe(4)
-      target.writeInt32BE(value, offset)
-      return target
-    }
-    lengthEncoder.bytes = 4 // Always because fixed length
-
     const output = await pipe(
       input,
-      lp.encode({ lengthEncoder }),
+      lp.encode({ lengthEncoder: int32BEEncode }),
       toBuffer,
       collect
     )
