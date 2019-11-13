@@ -1,3 +1,5 @@
+'use strict'
+
 const { map } = require('streaming-iterables')
 const randomInt = require('random-int')
 const randomBytes = require('random-bytes')
