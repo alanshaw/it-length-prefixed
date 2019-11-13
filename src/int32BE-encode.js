@@ -1,3 +1,5 @@
+'use strict'
+
 const { Buffer } = require('buffer')
 
 const int32BEEncode = (value, target, offset) => {

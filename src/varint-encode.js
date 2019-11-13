@@ -1,3 +1,5 @@
+'use strict'
+
 const Varint = require('varint')
 const { Buffer } = require('buffer')
 
