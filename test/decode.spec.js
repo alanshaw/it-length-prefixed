@@ -87,7 +87,7 @@ describe('decode', () => {
   it('should not decode message length that is too long', async () => {
     // A value < 0x80 signifies end of varint so pass buffers of >= 0x80
     // so that it will keep throwing a RangeError until we reach the max length
-    const lengths = times(randomInt(5, 10), () => Buffer.alloc(MAX_LENGTH_LENGTH / 4).fill(0x80))
+    const lengths = times(5, () => Buffer.alloc(MAX_LENGTH_LENGTH / 4).fill(0x80))
     const bytes = await randomBytes(randomInt(2, 64))
 
     const input = [...lengths, bytes]

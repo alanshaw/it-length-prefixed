@@ -4,7 +4,7 @@ const BufferList = require('bl/BufferList')
 const varintDecode = require('./varint-decode')
 
 // Maximum length of the length section of the message
-const MAX_LENGTH_LENGTH = 147 // Varint.encode(Number.MAX_VALUE).length
+const MAX_LENGTH_LENGTH = 8 // Varint.encode(Number.MAX_SAFE_INTEGER).length
 // Maximum length of the data section of the message
 const MAX_DATA_LENGTH = 1024 * 1024 * 4
 

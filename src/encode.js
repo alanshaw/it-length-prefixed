@@ -4,7 +4,7 @@ const { Buffer } = require('buffer')
 const BufferList = require('bl/BufferList')
 const varintEncode = require('./varint-encode')
 
-const MIN_POOL_SIZE = 147 // Varint.encode(Number.MAX_VALUE).length
+const MIN_POOL_SIZE = 8 // Varint.encode(Number.MAX_SAFE_INTEGER).length
 const DEFAULT_POOL_SIZE = 10 * 1024
 
 function encode (options) {

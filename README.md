@@ -61,7 +61,7 @@ console.log(decoded)
 
 - `opts: Object`, optional
   - `poolSize: 10 * 1024`: Buffer pool size to allocate up front
-  - `minPoolSize: 147`: The minimum size the pool can be before it is re-allocated. Note this is important 
+  - `minPoolSize: 8`: The minimum size the pool can be before it is re-allocated. Note: it is important this value is greater than the maximum value that can be encoded by the `lengthEncoder` (see the next option). Since encoded lengths are written into a buffer pool, there needs to be enough space to hold the encoded value.
   - `lengthEncoder: Function`: A function that encodes the length that will prefix each message. By default this is a [`varint`](https://www.npmjs.com/package/varint) encoder. It is passed a `value` to encode, an (optional) `target` buffer to write to and an (optional) `offset` to start writing from. The function should encode the `value` into the `target` (or alloc a new Buffer if not specified), set the `lengthEncoder.bytes` value (the number of bytes written) and return the `target`.
     - The following additional length encoders are available:
       - **int32BE** - `const { int32BEEncode } = require('it-length-prefixed')`
