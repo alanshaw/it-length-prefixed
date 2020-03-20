@@ -82,7 +82,7 @@ function decode (options) {
       while (chunk) {
         const result = ReadHandlers[mode](chunk, buffer, state, options)
         ;({ mode, chunk, buffer, state } = result)
-        if (result.data) yield result.data
+        if (result.data) yield result.data.slice()
       }
     }
 

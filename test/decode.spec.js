@@ -9,7 +9,7 @@ const { collect } = require('streaming-iterables')
 const Varint = require('varint')
 const BufferList = require('bl/BufferList')
 const defer = require('p-defer')
-const { toBuffer, times } = require('./_helpers')
+const { times } = require('./_helpers')
 
 const lp = require('../')
 const { MAX_LENGTH_LENGTH, MAX_DATA_LENGTH } = lp.decode
@@ -25,7 +25,7 @@ describe('decode', () => {
       bytes
     ])
 
-    const [output] = await pipe([input], lp.decode(), toBuffer, collect)
+    const [output] = await pipe([input], lp.decode(), collect)
     expect(output.slice(-byteLength)).to.deep.equal(bytes)
   })
 
@@ -48,7 +48,7 @@ describe('decode', () => {
       bytes
     ])
 
-    const [output] = await pipe([input], lp.decode(), toBuffer, collect)
+    const [output] = await pipe([input], lp.decode(), collect)
     expect(output.slice(-byteLength)).to.deep.equal(bytes)
   })
 
@@ -64,7 +64,7 @@ describe('decode', () => {
       ])
     ]
 
-    const [output] = await pipe(input, lp.decode(), toBuffer, collect)
+    const [output] = await pipe(input, lp.decode(), collect)
     expect(output.slice(-byteLength)).to.deep.equal(bytes)
   })
 
@@ -80,7 +80,7 @@ describe('decode', () => {
       bytes.slice(1)
     ]
 
-    const [output] = await pipe(input, lp.decode(), toBuffer, collect)
+    const [output] = await pipe(input, lp.decode(), collect)
     expect(output.slice(-byteLength)).to.deep.equal(bytes)
   })
 
@@ -93,7 +93,7 @@ describe('decode', () => {
     const input = [...lengths, bytes]
 
     try {
-      await pipe(input, lp.decode(), toBuffer, collect)
+      await pipe(input, lp.decode(), collect)
     } catch (err) {
       expect(err.code).to.equal('ERR_MSG_LENGTH_TOO_LONG')
       return
@@ -111,7 +111,7 @@ describe('decode', () => {
     ]
 
     try {
-      await pipe(input, lp.decode(), toBuffer, collect)
+      await pipe(input, lp.decode(), collect)
     } catch (err) {
       expect(err.code).to.equal('ERR_MSG_DATA_TOO_LONG')
       return
@@ -138,7 +138,7 @@ describe('decode', () => {
       ])
     ]
 
-    const output = await pipe(input, lp.decode(), toBuffer, collect)
+    const output = await pipe(input, lp.decode(), collect)
     expect(output[0].slice(-byteLength0)).to.deep.equal(bytes0)
     expect(output[1].slice(-byteLength1)).to.deep.equal(bytes1)
   })
@@ -221,7 +221,7 @@ describe('decode', () => {
       ])
     ]
 
-    const output = await pipe(input, lp.decode({ lengthDecoder: int32BEDecode }), toBuffer, collect)
+    const output = await pipe(input, lp.decode({ lengthDecoder: int32BEDecode }), collect)
     expect(output[0].slice(-byteLength0)).to.deep.equal(bytes0)
     expect(output[1].slice(-byteLength1)).to.deep.equal(bytes1)
   })

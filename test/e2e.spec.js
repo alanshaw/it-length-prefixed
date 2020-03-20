@@ -7,7 +7,6 @@ const pipe = require('it-pipe')
 const block = require('it-block')
 const Pushable = require('it-pushable')
 const { map, tap, collect } = require('streaming-iterables')
-const { toBuffer } = require('./_helpers')
 
 const lp = require('../')
 const { int32BEEncode, int32BEDecode } = lp
@@ -19,7 +18,7 @@ describe('e2e', () => {
       Buffer.from('world')
     ]
 
-    const encoded = await pipe(input, lp.encode(), toBuffer, collect)
+    const encoded = await pipe(input, lp.encode(), collect)
 
     const helloLen = Varint.encode('hello '.length)
     const worldLen = Varint.encode('world'.length)
@@ -37,7 +36,7 @@ describe('e2e', () => {
       ])
     ])
 
-    const output = await pipe(encoded, lp.decode(), toBuffer, collect)
+    const output = await pipe(encoded, lp.decode(), collect)
 
     expect(input).to.be.eql(output)
   })
@@ -48,7 +47,7 @@ describe('e2e', () => {
       Buffer.from('world')
     ]
 
-    const encoded = await pipe(input, lp.encode(), toBuffer, collect)
+    const encoded = await pipe(input, lp.encode(), collect)
 
     const helloLen = Varint.encode('hello '.length)
     const worldLen = Varint.encode('world'.length)
@@ -77,7 +76,7 @@ describe('e2e', () => {
   })
 
   it('zero length', async () => {
-    const encoded = await pipe([], lp.encode(), toBuffer, collect)
+    const encoded = await pipe([], lp.encode(), collect)
 
     expect(encoded).to.be.eql([])
 
@@ -85,7 +84,6 @@ describe('e2e', () => {
       [Buffer.alloc(0), Buffer.from('more data')],
       lp.encode(),
       lp.decode(),
-      toBuffer,
       collect
     )
 
@@ -117,7 +115,6 @@ describe('e2e', () => {
       p,
       lp.encode(),
       lp.decode(),
-      toBuffer,
       collect
     )
 
@@ -166,7 +163,6 @@ describe('e2e', () => {
         lp.encode(),
         block(size, { noPad: true }),
         lp.decode(),
-        toBuffer,
         collect
       )
 
@@ -200,7 +196,6 @@ describe('e2e', () => {
         delay(10),
         lp.encode(),
         lp.decode(),
-        toBuffer,
         collect
       )
 
@@ -213,7 +208,6 @@ describe('e2e', () => {
         lp.encode(),
         delay(10),
         lp.decode(),
-        toBuffer,
         collect
       )
 
@@ -225,7 +219,6 @@ describe('e2e', () => {
         input,
         lp.encode({ lengthEncoder: int32BEEncode }),
         lp.decode({ lengthDecoder: int32BEDecode }),
-        toBuffer,
         collect
       )
 

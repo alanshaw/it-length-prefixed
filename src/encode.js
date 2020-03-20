@@ -1,7 +1,6 @@
 'use strict'
 
 const { Buffer } = require('buffer')
-const BufferList = require('bl/BufferList')
 const varintEncode = require('./varint-encode')
 
 const MIN_POOL_SIZE = 8 // Varint.encode(Number.MAX_SAFE_INTEGER).length
@@ -27,8 +26,7 @@ function encode (options) {
         poolOffset = 0
       }
 
-      yield new BufferList().append(encodedLength).append(chunk)
-      // yield Buffer.concat([encodedLength, chunk])
+      yield Buffer.concat([encodedLength, chunk])
     }
   })()
 }
@@ -36,7 +34,7 @@ function encode (options) {
 encode.single = (chunk, options) => {
   options = options || {}
   const encodeLength = options.lengthEncoder || varintEncode
-  return new BufferList([encodeLength(chunk.length), chunk])
+  return Buffer.concat([encodeLength(chunk.length), chunk])
 }
 
 module.exports = encode

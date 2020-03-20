@@ -7,7 +7,7 @@ const { expect } = require('chai')
 const randomBytes = require('random-bytes')
 const { collect } = require('streaming-iterables')
 const Varint = require('varint')
-const { toBuffer, times, someBytes } = require('./_helpers')
+const { times, someBytes } = require('./_helpers')
 
 const lp = require('../')
 
@@ -20,7 +20,6 @@ describe('decode from reader', () => {
 
     const output = await pipe(
       lp.decode.fromReader(reader),
-      toBuffer,
       collect
     )
 
@@ -40,7 +39,6 @@ describe('decode from reader', () => {
     try {
       await pipe(
         lp.decode.fromReader(reader, { maxDataLength: 100 }),
-        toBuffer,
         collect
       )
     } catch (err) {
