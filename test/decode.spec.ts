@@ -160,11 +160,7 @@ describe('decode', () => {
     const onLength = (len: number) => {
       const expectedLength = expectedLengths.shift()
 
-      try {
-        expect(len).to.equal(expectedLength)
-      } catch (err) {
-        return lengthDeferred.reject(err)
-      }
+      expect(len).to.equal(expectedLength)
 
       if (expectedLengths.length === 0) {
         lengthDeferred.resolve()
@@ -174,11 +170,7 @@ describe('decode', () => {
     const onData = (data: BufferList | Uint8Array) => {
       const expectedData = expectedDatas.shift()
 
-      try {
-        expect(data.slice()).to.deep.equal(expectedData)
-      } catch (err) {
-        return dataDeferred.reject(err)
-      }
+      expect(data.slice()).to.deep.equal(expectedData)
 
       if (expectedLengths.length === 0) {
         dataDeferred.resolve()
