@@ -106,8 +106,8 @@ const ReadHandlers: Record<string, ReadHandler> = {
   }
 }
 
-export function decode (options?: DecoderOptions): Transform<BufferList | Uint8Array, BufferList> {
-  const decoder = async function * (source: Source<BufferList | Uint8Array>): Source<BufferList> {
+export function decode (options?: DecoderOptions): Transform<BufferList | Uint8Array, Uint8Array> {
+  const decoder = async function * (source: Source<BufferList | Uint8Array>): Source<Uint8Array> {
     let buffer = new BufferList()
     let mode = ReadModes.LENGTH // current parsing mode
     let state: ReadState | undefined // accumulated state for the current mode
@@ -127,7 +127,7 @@ export function decode (options?: DecoderOptions): Transform<BufferList | Uint8A
         state = result.state
 
         if (result.data != null) {
-          yield result.data
+          yield result.data.slice()
         }
       }
     }

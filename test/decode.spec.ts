@@ -7,7 +7,7 @@ import varint from 'varint'
 import BufferList from 'bl/BufferList.js'
 import defer from 'p-defer'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
-import { toBuffer, times } from './helpers/index.js'
+import { times } from './helpers/index.js'
 import * as lp from '../src/index.js'
 import { MAX_LENGTH_LENGTH, MAX_DATA_LENGTH } from '../src/decode.js'
 
@@ -23,7 +23,7 @@ describe('decode', () => {
       bytes
     ])
 
-    const [output] = await pipe([input], lp.decode(), toBuffer, async (source) => await all(source))
+    const [output] = await pipe([input], lp.decode(), async (source) => await all(source))
     expect(output.slice(-byteLength)).to.deep.equal(bytes)
   })
 
@@ -33,7 +33,7 @@ describe('decode', () => {
       new Uint8Array()
     ])
 
-    const [output] = await pipe([input], lp.decode(), toBuffer, async (source) => await all(source))
+    const [output] = await pipe([input], lp.decode(), async (source) => await all(source))
     expect(output).to.deep.equal(new Uint8Array(0))
   })
 
@@ -48,7 +48,7 @@ describe('decode', () => {
       bytes
     ])
 
-    const [output] = await pipe([input], lp.decode(), toBuffer, async (source) => await all(source))
+    const [output] = await pipe([input], lp.decode(), async (source) => await all(source))
     expect(output.slice(-byteLength)).to.deep.equal(bytes)
   })
 
@@ -64,7 +64,7 @@ describe('decode', () => {
       ])
     ]
 
-    const [output] = await pipe(input, lp.decode(), toBuffer, async (source) => await all(source))
+    const [output] = await pipe(input, lp.decode(), async (source) => await all(source))
     expect(output.slice(-byteLength)).to.deep.equal(bytes)
   })
 
@@ -80,7 +80,7 @@ describe('decode', () => {
       bytes.slice(1)
     ]
 
-    const [output] = await pipe(input, lp.decode(), toBuffer, async (source) => await all(source))
+    const [output] = await pipe(input, lp.decode(), async (source) => await all(source))
     expect(output.slice(-byteLength)).to.deep.equal(bytes)
   })
 
@@ -93,7 +93,7 @@ describe('decode', () => {
     const input = [...lengths, bytes]
 
     await expect(
-      pipe(input, lp.decode(), toBuffer, async (source) => await all(source))
+      pipe(input, lp.decode(), async (source) => await all(source))
     ).to.eventually.be.rejected.with.property('code', 'ERR_MSG_LENGTH_TOO_LONG')
   })
 
@@ -107,7 +107,7 @@ describe('decode', () => {
     ]
 
     await expect(
-      pipe(input, lp.decode(), toBuffer, async (source) => await all(source))
+      pipe(input, lp.decode(), async (source) => await all(source))
     ).to.eventually.be.rejected.with.property('code', 'ERR_MSG_DATA_TOO_LONG')
   })
 
@@ -130,7 +130,7 @@ describe('decode', () => {
       ])
     ]
 
-    const output = await pipe(input, lp.decode(), toBuffer, async (source) => await all(source))
+    const output = await pipe(input, lp.decode(), async (source) => await all(source))
     expect(output[0].slice(-byteLength0)).to.deep.equal(bytes0)
     expect(output[1].slice(-byteLength1)).to.deep.equal(bytes1)
   })
@@ -175,7 +175,7 @@ describe('decode', () => {
       const expectedData = expectedDatas.shift()
 
       try {
-        expect(data.slice()).to.eql(expectedData)
+        expect(data.slice()).to.deep.equal(expectedData)
       } catch (err) {
         return dataDeferred.reject(err)
       }
@@ -215,7 +215,7 @@ describe('decode', () => {
       ])
     ]
 
-    const output = await pipe(input, lp.decode({ lengthDecoder: int32BEDecode }), toBuffer, async (source) => await all(source))
+    const output = await pipe(input, lp.decode({ lengthDecoder: int32BEDecode }), async (source) => await all(source))
     expect(output[0].slice(-byteLength0)).to.deep.equal(bytes0)
     expect(output[1].slice(-byteLength1)).to.deep.equal(bytes1)
   })
