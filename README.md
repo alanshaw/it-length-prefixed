@@ -16,7 +16,7 @@ npm install it-length-prefixed
 
 ```js
 import { pipe } from 'it-pipe'
-import { lengthPrefixed } from 'it-length-prefixed'
+import * as lp from 'it-length-prefixed'
 
 const encoded = []
 
@@ -52,6 +52,24 @@ console.log(decoded)
 ```
 
 ## API
+
+```js
+import {
+  encode, decode
+} from 'it-length-prefixed'
+
+import {
+  encode,
+  MIN_POOL_SIZE,
+  DEFAULT_POOL_SIZE
+} from 'it-length-prefixed/encode'
+
+import {
+  decode,
+  MAX_LENGTH_LENGTH,
+  MAX_DATA_LENGTH
+} from 'it-length-prefixed/decode'
+```
 
 ### `encode([opts])`
 
