@@ -1,7 +1,8 @@
 import { decode, encode } from '../dist/src/index.js'
 import { pipe } from 'it-pipe'
-import { concat } from 'uint8arrays/concat'
 import { randomBytes } from 'iso-random-stream'
+import drain from 'it-drain'
+import { Uint8ArrayList } from 'uint8arraylist'
 
 const REPEAT = 1000
 let start = Date.now()
@@ -10,13 +11,13 @@ const data = await pipe(
   [bytes],
   encode(),
   async source => {
-    let buf = new Uint8Array()
+    let buf = new Uint8ArrayList()
 
     for await (const b of source) {
-      buf = concat(buf, b)
+      buf.append(b)
     }
 
-    return buf
+    return buf.slice()
   }
 )
 
@@ -31,15 +32,7 @@ for (let i = 0; i < REPEAT; i++) {
         data.subarray(30)
       ],
       decode(),
-      async source => {
-        let buf = new Uint8Array()
-
-        for await (const b of source) {
-
-        }
-
-        return buf
-      }
+      drain
     )
   }
 }
