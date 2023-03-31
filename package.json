@@ -184,7 +184,7 @@
     "iso-random-stream": "^2.0.0",
     "it-all": "^2.0.0",
     "it-block": "^6.0.0",
-    "it-drain": "^2.0.0",
+    "it-drain": "^3.0.1",
     "it-foreach": "^1.0.0",
     "it-map": "^2.0.0",
     "it-pipe": "^2.0.2",
