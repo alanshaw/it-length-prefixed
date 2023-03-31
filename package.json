@@ -187,7 +187,7 @@
     "it-drain": "^2.0.0",
     "it-foreach": "^1.0.0",
     "it-map": "^2.0.0",
-    "it-pipe": "^2.0.2",
+    "it-pipe": "^3.0.0",
     "it-pushable": "^3.0.0",
     "it-reader": "^6.0.1",
     "p-defer": "^4.0.0",
