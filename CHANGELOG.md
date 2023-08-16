@@ -1,3 +1,16 @@
+## [9.0.2](https://github.com/alanshaw/it-length-prefixed/compare/v9.0.1...v9.0.2) (2023-08-16)
+
+
+### Trivial Changes
+
+* add or force update .github/workflows/js-test-and-release.yml ([#93](https://github.com/alanshaw/it-length-prefixed/issues/93)) ([740ff48](https://github.com/alanshaw/it-length-prefixed/commit/740ff48e010b2b3d85498fe9537f4f174d3a9af6))
+* delete templates [skip ci] ([#92](https://github.com/alanshaw/it-length-prefixed/issues/92)) ([92a563c](https://github.com/alanshaw/it-length-prefixed/commit/92a563cc656b6a4eb9be89fb41b0a8ce58bf6e6d))
+
+
+### Dependencies
+
+* **dev:** bump aegir from 38.1.8 to 40.0.0 ([#91](https://github.com/alanshaw/it-length-prefixed/issues/91)) ([68a809e](https://github.com/alanshaw/it-length-prefixed/commit/68a809e5e9ab2556b23d523b6b47f3100fb19752))
+
 ## [9.0.1](https://github.com/alanshaw/it-length-prefixed/compare/v9.0.0...v9.0.1) (2023-04-18)
 
 
