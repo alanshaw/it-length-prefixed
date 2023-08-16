@@ -1,3 +1,10 @@
+## [9.0.3](https://github.com/alanshaw/it-length-prefixed/compare/v9.0.2...v9.0.3) (2023-08-16)
+
+
+### Dependencies
+
+* upgrade uint8-varint to 2.x.x ([#94](https://github.com/alanshaw/it-length-prefixed/issues/94)) ([9753f22](https://github.com/alanshaw/it-length-prefixed/commit/9753f2203ba64f8cca404ac7a3f696b54f6dce45))
+
 ## [9.0.2](https://github.com/alanshaw/it-length-prefixed/compare/v9.0.1...v9.0.2) (2023-08-16)
 
 
