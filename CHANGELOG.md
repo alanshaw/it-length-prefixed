@@ -1,3 +1,10 @@
+## [9.0.4](https://github.com/alanshaw/it-length-prefixed/compare/v9.0.3...v9.0.4) (2023-12-30)
+
+
+### Dependencies
+
+* bump uint8arrays from 4.0.10 to 5.0.1 ([#116](https://github.com/alanshaw/it-length-prefixed/issues/116)) ([356d085](https://github.com/alanshaw/it-length-prefixed/commit/356d0851d3c1ddc60de9f35730e776a7c3c712d9))
+
 ## [9.0.3](https://github.com/alanshaw/it-length-prefixed/compare/v9.0.2...v9.0.3) (2023-08-16)
 
 
