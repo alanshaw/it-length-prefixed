@@ -180,7 +180,7 @@
     "uint8arrays": "^5.0.1"
   },
   "devDependencies": {
-    "aegir": "^40.0.0",
+    "aegir": "^42.2.2",
     "iso-random-stream": "^2.0.0",
     "it-all": "^3.0.0",
     "it-block": "^6.0.0",
