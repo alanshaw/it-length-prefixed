@@ -1,3 +1,9 @@
+## [9.0.5](https://github.com/alanshaw/it-length-prefixed/compare/v9.0.4...v9.0.5) (2024-08-07)
+
+### Dependencies
+
+* **dev:** bump aegir from 40.0.13 to 44.1.0 ([#128](https://github.com/alanshaw/it-length-prefixed/issues/128)) ([b92db93](https://github.com/alanshaw/it-length-prefixed/commit/b92db934159d360f981df2116d2e6525dc5a41dc))
+
 ## [9.0.4](https://github.com/alanshaw/it-length-prefixed/compare/v9.0.3...v9.0.4) (2023-12-30)
 
 
