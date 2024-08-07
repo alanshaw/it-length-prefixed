@@ -14,8 +14,8 @@ export interface ReadState {
 
 export interface DecoderOptions {
   lengthDecoder?: LengthDecoderFunction
-  onData?: (data: Uint8ArrayList) => void
-  onLength?: (length: number) => void
+  onData?(data: Uint8ArrayList): void
+  onLength?(length: number): void
   maxLengthLength?: number
   maxDataLength?: number
 }
