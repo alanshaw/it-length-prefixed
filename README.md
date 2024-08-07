@@ -1,40 +1,30 @@
-# it-length-prefixed <!-- omit in toc -->
+# it-length-prefixed
 
 [![codecov](https://img.shields.io/codecov/c/github/alanshaw/it-length-prefixed.svg?style=flat-square)](https://codecov.io/gh/alanshaw/it-length-prefixed)
 [![CI](https://img.shields.io/github/actions/workflow/status/alanshaw/it-length-prefixed/js-test-and-release.yml?branch=master\&style=flat-square)](https://github.com/alanshaw/it-length-prefixed/actions/workflows/js-test-and-release.yml?query=branch%3Amaster)
 
 > Streaming length prefixed buffers with async iterables
 
-## Table of contents <!-- omit in toc -->
+# About
 
-- [Install](#install)
-  - [Browser `<script>` tag](#browser-script-tag)
-- [Usage](#usage)
-- [API](#api)
-  - [`encode(source, [opts])`](#encodesource-opts)
-  - [`encode.single(chunk, [opts])`](#encodesinglechunk-opts)
-  - [`decode(source, [opts])`](#decodesource-opts)
-  - [`decode.fromReader(reader, [opts])`](#decodefromreaderreader-opts)
-- [Contribute](#contribute)
-- [API Docs](#api-docs)
-- [License](#license)
-- [Contribution](#contribution)
+<!--
 
-## Install
+!IMPORTANT!
 
-```console
-$ npm i it-length-prefixed
-```
+Everything in this README between "# About" and "# Install" is automatically
+generated and will be overwritten the next time the doc generator is run.
 
-### Browser `<script>` tag
+To make changes to this section, please update the @packageDocumentation section
+of src/index.js or src/index.ts
 
-Loading this module through a script tag will make it's exports available as `ItLengthPrefixed` in the global namespace.
+To experiment with formatting, please run "npm run docs" from the root of this
+repo and examine the changes made.
 
-```html
-<script src="https://unpkg.com/it-length-prefixed/dist/index.min.js"></script>
-```
+-->
 
-## Usage
+Encode/decode streams of bytes with length-prefixes.
+
+## Example
 
 ```js
 import { pipe } from 'it-pipe'
@@ -132,21 +122,17 @@ Behaves like `decode` except it only reads the exact number of bytes needed for 
 
 Returns `Generator` or `AsyncGenerator` that yields [`Uint8ArrayList`](https://www.npmjs.com/package/uint8arraylist) objects.
 
-## Contribute
-
-PRs and issues gladly accepted! Check out the [issues](https://github.com/alanshaw/it-length-prefixed/issues).
-
-## API Docs
+# API Docs
 
 - <https://alanshaw.github.io/it-length-prefixed>
 
-## License
+# License
 
 Licensed under either of
 
-- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
-- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+- Apache 2.0, ([LICENSE-APACHE](https://github.com/alanshaw/it-length-prefixed/LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](https://github.com/alanshaw/it-length-prefixed/LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
 
-## Contribution
+# Contribution
 
 Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.
