@@ -1,3 +1,9 @@
+## [9.1.0](https://github.com/alanshaw/it-length-prefixed/compare/v9.0.5...v9.1.0) (2024-08-08)
+
+### Features
+
+* add custom errors and remove err-code ([#129](https://github.com/alanshaw/it-length-prefixed/issues/129)) ([7b845bd](https://github.com/alanshaw/it-length-prefixed/commit/7b845bd4f6dfc2eecfd57eb9e1e9290543de8ebf))
+
 ## [9.0.5](https://github.com/alanshaw/it-length-prefixed/compare/v9.0.4...v9.0.5) (2024-08-07)
 
 ### Dependencies
