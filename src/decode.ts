@@ -1,8 +1,8 @@
 /* eslint max-depth: ["error", 6] */
 
-import errCode from 'err-code'
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
+import { InvalidDataLengthError, InvalidDataLengthLengthError, InvalidMessageLengthError, UnexpectedEOFError } from './errors.js'
 import { isAsyncIterable } from './utils.js'
 import type { LengthDecoderFunction } from './index.js'
 import type { Reader } from 'it-reader'
@@ -65,11 +65,11 @@ export function decode (source: Source<Uint8ArrayList | Uint8Array>, options?: D
           dataLength = lengthDecoder(buffer)
 
           if (dataLength < 0) {
-            throw errCode(new Error('invalid message length'), 'ERR_INVALID_MSG_LENGTH')
+            throw new InvalidMessageLengthError('Invalid message length')
           }
 
           if (dataLength > maxDataLength) {
-            throw errCode(new Error('message length too long'), 'ERR_MSG_DATA_TOO_LONG')
+            throw new InvalidDataLengthError('Message length too long')
           }
 
           const dataLengthLength = lengthDecoder.bytes
@@ -83,7 +83,7 @@ export function decode (source: Source<Uint8ArrayList | Uint8Array>, options?: D
         } catch (err: any) {
           if (err instanceof RangeError) {
             if (buffer.byteLength > maxLengthLength) {
-              throw errCode(new Error('message length length too long'), 'ERR_MSG_LENGTH_TOO_LONG')
+              throw new InvalidDataLengthLengthError('Message length length too long')
             }
 
             break
@@ -122,7 +122,7 @@ export function decode (source: Source<Uint8ArrayList | Uint8Array>, options?: D
       }
 
       if (buffer.byteLength > 0) {
-        throw errCode(new Error('unexpected end of input'), 'ERR_UNEXPECTED_EOF')
+        throw new UnexpectedEOFError('Unexpected end of input')
       }
     })()
   }
@@ -135,7 +135,7 @@ export function decode (source: Source<Uint8ArrayList | Uint8Array>, options?: D
     }
 
     if (buffer.byteLength > 0) {
-      throw errCode(new Error('unexpected end of input'), 'ERR_UNEXPECTED_EOF')
+      throw new UnexpectedEOFError('Unexpected end of input')
     }
   })()
 }
