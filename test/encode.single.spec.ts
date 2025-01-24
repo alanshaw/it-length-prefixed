@@ -44,4 +44,31 @@ describe('encode.single', () => {
       expect(err.code).to.equal('ERR_MSG_DATA_TOO_LONG') // Check the error code
     }
   })
+
+  it('should throw an error if message data exceeds custom maxDataLength', () => {
+    const customMaxDataLength = 512 // Set a custom max data length for the test
+    const input = new Uint8Array(customMaxDataLength + 1) // Create a buffer larger than the custom max allowed
+
+    const options = { maxDataLength: customMaxDataLength } // Set maxDataLength in encoder options
+
+    try {
+      lp.encode.single(input, options) // Call encode.single with custom maxDataLength and expect it to throw
+      throw new Error('Expected error not thrown')
+    } catch (err: any) {
+      expect(err).to.be.an.instanceof(InvalidDataLengthError)
+      expect(err.code).to.equal('ERR_MSG_DATA_TOO_LONG') // Check the error code
+    }
+  })
+
+  it('should encode data within custom maxDataLength', () => {
+    const customMaxDataLength = 512 // Set a custom max data length for the test
+    const input = new Uint8Array(customMaxDataLength) // Create a buffer within the allowed size
+
+    const options = { maxDataLength: customMaxDataLength } // Set maxDataLength in encoder options
+    const output = lp.encode.single(input, options) // Call encode.single with options
+
+    const length = varint.decode(output)
+    expect(length).to.equal(input.length)
+    expect(output.slice(varint.encodingLength(output.byteLength))).to.deep.equal(input)
+  })
 })

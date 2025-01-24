@@ -97,4 +97,46 @@ describe('encode', () => {
       expect(err.code).to.equal('ERR_MSG_DATA_TOO_LONG') // Check the error code
     }
   })
+
+  it('should throw an error if message data exceeds custom maxDataLength', async () => {
+    const customMaxDataLength = 512 // Set a custom max data length
+    const input = [new Uint8Array(customMaxDataLength + 1)] // Create a buffer larger than the custom limit
+
+    const options = { maxDataLength: customMaxDataLength } // Set maxDataLength in options
+
+    try {
+      await pipe(
+        input,
+        (source) => lp.encode(source, options),
+        async (source) => all(source)
+      )
+      throw new Error('Expected error not thrown') // Fail the test if the error isn't thrown
+    } catch (err: any) {
+      expect(err).to.be.an.instanceof(InvalidDataLengthError)
+      expect(err.code).to.equal('ERR_MSG_DATA_TOO_LONG') // Check the error code
+    }
+  })
+
+  it('should encode data within custom maxDataLength', async () => {
+    const customMaxDataLength = 512 // Set a custom max data length
+    const input = [new Uint8Array(customMaxDataLength)] // Create a buffer within the allowed size
+
+    const options = { maxDataLength: customMaxDataLength } // Set maxDataLength in options
+    const output = await pipe(
+      input,
+      (source) => lp.encode(source, options),
+      async (source) => all(source)
+    )
+
+    let inputIndex = 0
+
+    for (let i = 0; i < output.length; i += 2, inputIndex++) {
+      const prefix = output[i]
+      const data = output[i + 1]
+
+      const length = varint.decode(prefix)
+      expect(length).to.equal(data.length)
+      expect(data).to.deep.equal(input[inputIndex])
+    }
+  })
 })
