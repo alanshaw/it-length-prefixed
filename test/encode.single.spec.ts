@@ -1,5 +1,7 @@
 import { expect } from 'aegir/chai'
 import * as varint from 'uint8-varint'
+import { MAX_DATA_LENGTH } from '../src/constants.js'
+import { InvalidDataLengthError } from '../src/errors.js'
 import * as lp from '../src/index.js'
 import { someBytes } from './helpers/index.js'
 import { int32BEEncode } from './helpers/int32BE-encode.js'
@@ -30,5 +32,16 @@ describe('encode.single', () => {
     const view = new DataView(output.buffer, output.byteOffset, output.byteLength)
     const length = view.getInt32(0, false)
     expect(length).to.equal(input.length)
+  })
+
+  it('should not encode message data that is too long', () => {
+    const input = new Uint8Array(MAX_DATA_LENGTH + 1) // Create a buffer larger than the max allowed
+    try {
+      lp.encode.single(input) // Call encode.single and expect it to throw
+      throw new Error('Expected error not thrown')
+    } catch (err: any) {
+      expect(err).to.be.an.instanceof(InvalidDataLengthError)
+      expect(err.code).to.equal('ERR_MSG_DATA_TOO_LONG') // Check the error code
+    }
   })
 })
