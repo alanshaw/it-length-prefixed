@@ -13,7 +13,7 @@ interface EncoderOptions {
 }
 
 // Helper function to validate the chunk size against maxDataLength
-function validateMaxDataLength(chunk: Uint8Array | Uint8ArrayList, maxDataLength: number): void {
+function validateMaxDataLength (chunk: Uint8Array | Uint8ArrayList, maxDataLength: number): void {
   if (chunk.byteLength > maxDataLength) {
     throw new InvalidDataLengthError('Message length too long')
   }
