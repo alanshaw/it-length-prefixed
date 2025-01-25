@@ -135,8 +135,8 @@ describe('encode', () => {
       const data = output[i + 1]
 
       const length = varint.decode(prefix)
-      expect(length).to.equal(data.length)
-      expect(data).to.deep.equal(input[inputIndex])
+      expect(data).to.haveLengthOf(length)
+      expect(data).to.equalBytes(input[inputIndex])
     }
   })
 })
