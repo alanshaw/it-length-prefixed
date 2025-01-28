@@ -5,7 +5,6 @@ import randomInt from 'random-int'
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { MAX_DATA_LENGTH } from '../src/constants.js'
-import { InvalidDataLengthError } from '../src/errors.js'
 import * as lp from '../src/index.js'
 import { times, someBytes } from './helpers/index.js'
 import { int32BEEncode } from './helpers/int32BE-encode.js'
@@ -85,17 +84,12 @@ describe('encode', () => {
 
   it('should not encode message data that is too long', async () => {
     const input = [new Uint8Array(MAX_DATA_LENGTH + 1)] // Create a buffer that exceeds the max length
-    try {
-      await pipe(
-        input,
-        (source) => lp.encode(source),
-        async (source) => all(source)
-      )
-      throw new Error('Expected error not thrown') // Fail the test if the error isn't thrown
-    } catch (err: any) {
-      expect(err).to.be.an.instanceof(InvalidDataLengthError)
-      expect(err.code).to.equal('ERR_MSG_DATA_TOO_LONG') // Check the error code
-    }
+
+    await expect(pipe(
+      input,
+      (source) => lp.encode(source),
+      async (source) => all(source)
+    )).to.eventually.be.rejected.with.property('code', 'ERR_MSG_DATA_TOO_LONG')
   })
 
   it('should throw an error if message data exceeds custom maxDataLength', async () => {
@@ -104,17 +98,11 @@ describe('encode', () => {
 
     const options = { maxDataLength: customMaxDataLength } // Set maxDataLength in options
 
-    try {
-      await pipe(
-        input,
-        (source) => lp.encode(source, options),
-        async (source) => all(source)
-      )
-      throw new Error('Expected error not thrown') // Fail the test if the error isn't thrown
-    } catch (err: any) {
-      expect(err).to.be.an.instanceof(InvalidDataLengthError)
-      expect(err.code).to.equal('ERR_MSG_DATA_TOO_LONG') // Check the error code
-    }
+    await expect(pipe(
+      input,
+      (source) => lp.encode(source, options),
+      async (source) => all(source)
+    )).to.eventually.be.rejected.with.property('code', 'ERR_MSG_DATA_TOO_LONG')
   })
 
   it('should encode data within custom maxDataLength', async () => {
@@ -135,7 +123,7 @@ describe('encode', () => {
       const data = output[i + 1]
 
       const length = varint.decode(prefix)
-      expect(data).to.haveLengthOf(length)
+      expect(data).to.have.lengthOf(length)
       expect(data).to.equalBytes(input[inputIndex])
     }
   })
