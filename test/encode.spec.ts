@@ -107,24 +107,31 @@ describe('encode', () => {
 
   it('should encode data within custom maxDataLength', async () => {
     const customMaxDataLength = 512 // Set a custom max data length
-    const input = [new Uint8Array(customMaxDataLength)] // Create a buffer within the allowed size
+
+    // Generate a Uint8Array filled with random bytes
+    const input = new Uint8Array(customMaxDataLength)
+    crypto.getRandomValues(input)
 
     const options = { maxDataLength: customMaxDataLength } // Set maxDataLength in options
     const output = await pipe(
-      input,
+      [input], // Input should be wrapped in an array (iterable source)
       (source) => lp.encode(source, options),
       async (source) => all(source)
     )
 
     let inputIndex = 0
 
-    for (let i = 0; i < output.length; i += 2, inputIndex++) {
+    let i = 0
+    while (i < output.length) {
       const prefix = output[i]
       const data = output[i + 1]
 
       const length = varint.decode(prefix)
       expect(data).to.have.lengthOf(length)
-      expect(data).to.equalBytes(input[inputIndex])
+      expect(data).to.equalBytes(input.slice(inputIndex, inputIndex + length))
+
+      inputIndex += length
+      i += 2 // Move to next pair (prefix, data)
     }
   })
 })
