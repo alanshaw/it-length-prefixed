@@ -1,12 +1,22 @@
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { allocUnsafe } from 'uint8arrays/alloc'
+import { MAX_DATA_LENGTH } from './constants.js'
+import { InvalidDataLengthError } from './errors.js'
 import { isAsyncIterable } from './utils.js'
 import type { LengthEncoderFunction } from './index.js'
 import type { Source } from 'it-stream-types'
 
 interface EncoderOptions {
   lengthEncoder?: LengthEncoderFunction
+  maxDataLength?: number
+}
+
+// Helper function to validate the chunk size against maxDataLength
+function validateMaxDataLength (chunk: Uint8Array | Uint8ArrayList, maxDataLength: number): void {
+  if (chunk.byteLength > maxDataLength) {
+    throw new InvalidDataLengthError('Message length too long')
+  }
 }
 
 const defaultEncoder: LengthEncoderFunction = (length) => {
@@ -27,8 +37,11 @@ export function encode (source: Source<Uint8ArrayList | Uint8Array>, options?: E
   options = options ?? {}
 
   const encodeLength = options.lengthEncoder ?? defaultEncoder
+  const maxDataLength = options?.maxDataLength ?? MAX_DATA_LENGTH
 
   function * maybeYield (chunk: Uint8Array | Uint8ArrayList): Generator<Uint8Array, void, undefined> {
+    validateMaxDataLength(chunk, maxDataLength)
+
     // length + data
     const length = encodeLength(chunk.byteLength)
 
@@ -65,6 +78,9 @@ export function encode (source: Source<Uint8ArrayList | Uint8Array>, options?: E
 encode.single = (chunk: Uint8ArrayList | Uint8Array, options?: EncoderOptions) => {
   options = options ?? {}
   const encodeLength = options.lengthEncoder ?? defaultEncoder
+  const maxDataLength = options?.maxDataLength ?? MAX_DATA_LENGTH
+
+  validateMaxDataLength(chunk, maxDataLength)
 
   return new Uint8ArrayList(
     encodeLength(chunk.byteLength),

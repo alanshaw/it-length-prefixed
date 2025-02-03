@@ -2,6 +2,7 @@
 
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
+import { MAX_DATA_LENGTH, MAX_LENGTH_LENGTH } from './constants.js'
 import { InvalidDataLengthError, InvalidDataLengthLengthError, InvalidMessageLengthError, UnexpectedEOFError } from './errors.js'
 import { isAsyncIterable } from './utils.js'
 import type { LengthDecoderFunction } from './index.js'
@@ -27,11 +28,6 @@ export interface ReadResult {
   state?: ReadState
   data?: Uint8ArrayList
 }
-
-// Maximum length of the length section of the message
-export const MAX_LENGTH_LENGTH = 8 // Varint.encode(Number.MAX_SAFE_INTEGER).length
-// Maximum length of the data section of the message
-export const MAX_DATA_LENGTH = 1024 * 1024 * 4
 
 enum ReadMode {
   LENGTH,
