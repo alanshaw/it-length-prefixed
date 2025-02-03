@@ -1,3 +1,13 @@
+## [10.0.0](https://github.com/alanshaw/it-length-prefixed/compare/v9.1.1...v10.0.0) (2025-02-03)
+
+### ⚠ BREAKING CHANGES
+
+* outgoing messages must now be shorter than the `maxDataLength` option, or 4MB if no option is passed
+
+### Bug Fixes
+
+* throw InvalidDataLengthError when input exceeds MAX_DATA_LENGTH ([#136](https://github.com/alanshaw/it-length-prefixed/issues/136)) ([7a56aaf](https://github.com/alanshaw/it-length-prefixed/commit/7a56aafd939171aa8da594f19ac1e21b67a570c3))
+
 ## [9.1.1](https://github.com/alanshaw/it-length-prefixed/compare/v9.1.0...v9.1.1) (2025-01-24)
 
 ### Dependencies
