@@ -4,13 +4,8 @@ import { allocUnsafe } from 'uint8arrays/alloc'
 import { MAX_DATA_LENGTH } from './constants.js'
 import { InvalidDataLengthError } from './errors.js'
 import { isAsyncIterable } from './utils.js'
-import type { LengthEncoderFunction } from './index.js'
+import type { EncoderOptions, LengthEncoderFunction } from './index.js'
 import type { Source } from 'it-stream-types'
-
-interface EncoderOptions {
-  lengthEncoder?: LengthEncoderFunction
-  maxDataLength?: number
-}
 
 // Helper function to validate the chunk size against maxDataLength
 function validateMaxDataLength (chunk: Uint8Array | Uint8ArrayList, maxDataLength: number): void {
