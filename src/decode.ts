@@ -5,29 +5,9 @@ import { Uint8ArrayList } from 'uint8arraylist'
 import { MAX_DATA_LENGTH, MAX_LENGTH_LENGTH } from './constants.js'
 import { InvalidDataLengthError, InvalidDataLengthLengthError, InvalidMessageLengthError, UnexpectedEOFError } from './errors.js'
 import { isAsyncIterable } from './utils.js'
-import type { LengthDecoderFunction } from './index.js'
+import type { DecoderOptions, LengthDecoderFunction } from './index.js'
 import type { Reader } from 'it-reader'
 import type { Source } from 'it-stream-types'
-
-export interface ReadState {
-  dataLength: number
-}
-
-export interface DecoderOptions {
-  lengthDecoder?: LengthDecoderFunction
-  onData?(data: Uint8ArrayList): void
-  onLength?(length: number): void
-  maxLengthLength?: number
-  maxDataLength?: number
-}
-
-export interface ReadResult {
-  mode: string
-  chunk?: Uint8ArrayList
-  buffer: Uint8ArrayList
-  state?: ReadState
-  data?: Uint8ArrayList
-}
 
 enum ReadMode {
   LENGTH,

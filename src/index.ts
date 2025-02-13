@@ -48,9 +48,22 @@ import type { Uint8ArrayList } from 'uint8arraylist'
 export { encode } from './encode.js'
 export { decode } from './decode.js'
 
+export interface DecoderOptions {
+  lengthDecoder?: LengthDecoderFunction
+  onData?(data: Uint8ArrayList): void
+  onLength?(length: number): void
+  maxLengthLength?: number
+  maxDataLength?: number
+}
+
 export interface LengthDecoderFunction {
   (data: Uint8ArrayList): number
   bytes: number
+}
+
+export interface EncoderOptions {
+  lengthEncoder?: LengthEncoderFunction
+  maxDataLength?: number
 }
 
 export interface LengthEncoderFunction {
