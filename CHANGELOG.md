@@ -1,3 +1,9 @@
+## [10.0.1](https://github.com/alanshaw/it-length-prefixed/compare/v10.0.0...v10.0.1) (2025-02-13)
+
+### Bug Fixes
+
+* export option types ([#137](https://github.com/alanshaw/it-length-prefixed/issues/137)) ([2435d10](https://github.com/alanshaw/it-length-prefixed/commit/2435d101532ee0268cd09fe12cdcd297502aedf4))
+
 ## [10.0.0](https://github.com/alanshaw/it-length-prefixed/compare/v9.1.1...v10.0.0) (2025-02-03)
 
 ### ⚠ BREAKING CHANGES
