@@ -2,10 +2,10 @@
 
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
-import { MAX_DATA_LENGTH, MAX_LENGTH_LENGTH } from './constants.js'
-import { InvalidDataLengthError, InvalidDataLengthLengthError, InvalidMessageLengthError, UnexpectedEOFError } from './errors.js'
-import { isAsyncIterable } from './utils.js'
-import type { DecoderOptions, LengthDecoderFunction } from './index.js'
+import { MAX_DATA_LENGTH, MAX_LENGTH_LENGTH } from './constants.ts'
+import { InvalidDataLengthError, InvalidDataLengthLengthError, InvalidMessageLengthError, UnexpectedEOFError } from './errors.ts'
+import { isAsyncIterable } from './utils.ts'
+import type { DecoderOptions, LengthDecoderFunction } from './index.ts'
 import type { Reader } from 'it-reader'
 import type { Source } from 'it-stream-types'
 

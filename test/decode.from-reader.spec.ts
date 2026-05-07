@@ -1,17 +1,17 @@
 import { expect } from 'aegir/chai'
-import randomBytes from 'iso-random-stream/src/random.js'
+import { randomBytes } from 'iso-random-stream'
 import all from 'it-all'
 import { pipe } from 'it-pipe'
 import { reader } from 'it-reader'
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
-import * as lp from '../src/index.js'
-import { times, someBytes } from './helpers/index.js'
+import * as lp from '../src/index.ts'
+import { times, someBytes } from './helpers/index.ts'
 
 describe('decode from reader', () => {
   it('should be able to decode from an it-reader', async () => {
-    const input = await Promise.all(times(5, someBytes))
+    const input = times(5, someBytes)
     const stream = reader(
       pipe(
         input,
