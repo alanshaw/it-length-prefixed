@@ -178,7 +178,7 @@
     "it-stream-types": "^2.0.1",
     "uint8-varint": "^2.0.1",
     "uint8arraylist": "^2.0.0",
-    "uint8arrays": "^5.0.1"
+    "uint8arrays": "^6.1.0"
   },
   "devDependencies": {
     "aegir": "^48.0.1",
