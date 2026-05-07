@@ -1,3 +1,9 @@
+## [10.0.2](https://github.com/alanshaw/it-length-prefixed/compare/v10.0.1...v10.0.2) (2026-05-07)
+
+### Dependencies
+
+* **dev:** bump aegir from 45.2.1 to 47.0.26 ([#155](https://github.com/alanshaw/it-length-prefixed/issues/155)) ([8333245](https://github.com/alanshaw/it-length-prefixed/commit/8333245fbb104ec3e7b5251610bafda8129a6e31))
+
 ## [10.0.1](https://github.com/alanshaw/it-length-prefixed/compare/v10.0.0...v10.0.1) (2025-02-13)
 
 ### Bug Fixes
