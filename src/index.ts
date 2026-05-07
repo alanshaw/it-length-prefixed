@@ -45,8 +45,8 @@
 
 import type { Uint8ArrayList } from 'uint8arraylist'
 
-export { encode } from './encode.js'
-export { decode } from './decode.js'
+export { encode } from './encode.ts'
+export { decode } from './decode.ts'
 
 export interface DecoderOptions {
   lengthDecoder?: LengthDecoderFunction

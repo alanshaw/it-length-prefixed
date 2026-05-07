@@ -1,10 +1,10 @@
 import { expect } from 'aegir/chai'
 import * as varint from 'uint8-varint'
-import { MAX_DATA_LENGTH } from '../src/constants.js'
-import { InvalidDataLengthError } from '../src/errors.js'
-import * as lp from '../src/index.js'
-import { someBytes } from './helpers/index.js'
-import { int32BEEncode } from './helpers/int32BE-encode.js'
+import { MAX_DATA_LENGTH } from '../src/constants.ts'
+import { InvalidDataLengthError } from '../src/errors.ts'
+import * as lp from '../src/index.ts'
+import { someBytes } from './helpers/index.ts'
+import { int32BEEncode } from './helpers/int32BE-encode.ts'
 
 describe('encode.single', () => {
   it('should encode length as prefix', () => {

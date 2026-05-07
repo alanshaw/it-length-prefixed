@@ -4,14 +4,14 @@ import { pipe } from 'it-pipe'
 import randomInt from 'random-int'
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
-import { MAX_DATA_LENGTH } from '../src/constants.js'
-import * as lp from '../src/index.js'
-import { times, someBytes } from './helpers/index.js'
-import { int32BEEncode } from './helpers/int32BE-encode.js'
+import { MAX_DATA_LENGTH } from '../src/constants.ts'
+import * as lp from '../src/index.ts'
+import { times, someBytes } from './helpers/index.ts'
+import { int32BEEncode } from './helpers/int32BE-encode.ts'
 
 describe('encode', () => {
   it('should encode length as prefix', async () => {
-    const input = await Promise.all(times(randomInt(1, 10), someBytes))
+    const input = times(randomInt(1, 10), someBytes)
     const output = await pipe(
       input,
       (source) => lp.encode(source),
@@ -47,7 +47,7 @@ describe('encode', () => {
   })
 
   it('should encode with custom length encoder (int32BE)', async () => {
-    const input = await Promise.all(times(randomInt(1, 100), someBytes))
+    const input = times(randomInt(1, 100), someBytes)
     const output = await pipe(
       input,
       (source) => lp.encode(source, { lengthEncoder: int32BEEncode }),

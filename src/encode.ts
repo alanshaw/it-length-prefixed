@@ -1,10 +1,10 @@
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { allocUnsafe } from 'uint8arrays/alloc'
-import { MAX_DATA_LENGTH } from './constants.js'
-import { InvalidDataLengthError } from './errors.js'
-import { isAsyncIterable } from './utils.js'
-import type { EncoderOptions, LengthEncoderFunction } from './index.js'
+import { MAX_DATA_LENGTH } from './constants.ts'
+import { InvalidDataLengthError } from './errors.ts'
+import { isAsyncIterable } from './utils.ts'
+import type { EncoderOptions, LengthEncoderFunction } from './index.ts'
 import type { Source } from 'it-stream-types'
 
 // Helper function to validate the chunk size against maxDataLength

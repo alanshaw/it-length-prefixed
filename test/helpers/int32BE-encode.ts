@@ -1,5 +1,5 @@
 import { Uint8ArrayList } from 'uint8arraylist'
-import type { LengthEncoderFunction } from '../../src/index.js'
+import type { LengthEncoderFunction } from '../../src/index.ts'
 
 export const int32BEEncode: LengthEncoderFunction = (value) => {
   const data = new Uint8ArrayList(

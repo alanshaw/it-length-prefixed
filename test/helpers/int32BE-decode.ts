@@ -1,4 +1,4 @@
-import type { LengthDecoderFunction } from '../../src/index.js'
+import type { LengthDecoderFunction } from '../../src/index.ts'
 
 export const int32BEDecode: LengthDecoderFunction = (data) => {
   if (data.length < 4) {

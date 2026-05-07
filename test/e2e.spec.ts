@@ -9,9 +9,9 @@ import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
-import * as lp from '../src/index.js'
-import { int32BEDecode } from './helpers/int32BE-decode.js'
-import { int32BEEncode } from './helpers/int32BE-encode.js'
+import * as lp from '../src/index.ts'
+import { int32BEDecode } from './helpers/int32BE-decode.ts'
+import { int32BEEncode } from './helpers/int32BE-encode.ts'
 
 describe('e2e', () => {
   it('basics', async () => {

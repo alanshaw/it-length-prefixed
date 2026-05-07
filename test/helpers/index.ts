@@ -1,4 +1,4 @@
-import randomBytes from 'iso-random-stream/src/random.js'
+import { randomBytes } from 'iso-random-stream'
 import randomInt from 'random-int'
 
 export function times <T> (n: number, fn: (...args: any[]) => T): T[] {
