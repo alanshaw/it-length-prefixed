@@ -22,10 +22,10 @@ const defaultDecoder: LengthDecoderFunction = (buf) => {
 }
 defaultDecoder.bytes = 0
 
-export function decode (source: Iterable<Uint8ArrayList | Uint8Array>, options?: DecoderOptions): Generator<Uint8ArrayList, void, unknown>
-export function decode (source: Source<Uint8ArrayList | Uint8Array>, options?: DecoderOptions): AsyncGenerator<Uint8ArrayList, void, unknown>
-export function decode (source: Source<Uint8ArrayList | Uint8Array>, options?: DecoderOptions): Generator<Uint8ArrayList, void, unknown> | AsyncGenerator<Uint8ArrayList, void, unknown> {
-  const buffer = new Uint8ArrayList()
+export function decode <T extends ArrayBufferLike = ArrayBufferLike> (source: Iterable<Uint8ArrayList<T> | Uint8Array<T>>, options?: DecoderOptions): Generator<Uint8ArrayList<T>, void, unknown>
+export function decode <T extends ArrayBufferLike = ArrayBufferLike> (source: Source<Uint8ArrayList<T> | Uint8Array<T>>, options?: DecoderOptions): AsyncGenerator<Uint8ArrayList<T>, void, unknown>
+export function decode <T extends ArrayBufferLike = ArrayBufferLike> (source: Source<Uint8ArrayList<T> | Uint8Array<T>>, options?: DecoderOptions): Generator<Uint8ArrayList<T>, void, unknown> | AsyncGenerator<Uint8ArrayList<T>, void, unknown> {
+  const buffer = new Uint8ArrayList<T>()
   let mode = ReadMode.LENGTH
   let dataLength = -1
 
@@ -33,7 +33,7 @@ export function decode (source: Source<Uint8ArrayList | Uint8Array>, options?: D
   const maxLengthLength = options?.maxLengthLength ?? MAX_LENGTH_LENGTH
   const maxDataLength = options?.maxDataLength ?? MAX_DATA_LENGTH
 
-  function * maybeYield (): Generator<Uint8ArrayList> {
+  function * maybeYield (): Generator<Uint8ArrayList<T>> {
     while (buffer.byteLength > 0) {
       if (mode === ReadMode.LENGTH) {
         // read length, ignore errors for short reads

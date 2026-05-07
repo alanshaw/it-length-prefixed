@@ -174,17 +174,17 @@
     "docs": "aegir docs"
   },
   "dependencies": {
-    "it-reader": "^6.0.1",
+    "it-reader": "^7.0.0",
     "it-stream-types": "^2.0.1",
-    "uint8-varint": "^2.0.1",
-    "uint8arraylist": "^2.0.0",
-    "uint8arrays": "^5.0.1"
+    "uint8-varint": "^3.0.0",
+    "uint8arraylist": "^3.0.1",
+    "uint8arrays": "^6.1.0"
   },
   "devDependencies": {
     "aegir": "^48.0.1",
     "iso-random-stream": "^2.0.0",
     "it-all": "^3.0.0",
-    "it-block": "^6.0.0",
+    "it-block": "^7.0.0",
     "it-drain": "^3.0.0",
     "it-foreach": "^2.0.0",
     "it-map": "^3.0.0",
