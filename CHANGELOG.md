@@ -1,3 +1,13 @@
+## [11.0.0](https://github.com/alanshaw/it-length-prefixed/compare/v10.0.2...v11.0.0) (2026-05-07)
+
+### ⚠ BREAKING CHANGES
+
+* the `Uint8ArrayList`s yielded by the Generator returned by the decode function have a generic type that reflects the internal buffer type
+
+### Bug Fixes
+
+* Uint8Arrays are generic ([#159](https://github.com/alanshaw/it-length-prefixed/issues/159)) ([3314e1b](https://github.com/alanshaw/it-length-prefixed/commit/3314e1b2a6f565fe2ed4f1583846fcd2afa6b7bb)), closes [microsoft/TypeScript#59417](https://github.com/microsoft/TypeScript/issues/59417)
+
 ## [10.0.2](https://github.com/alanshaw/it-length-prefixed/compare/v10.0.1...v10.0.2) (2026-05-07)
 
 ### Dependencies
