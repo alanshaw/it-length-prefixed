@@ -1,3 +1,9 @@
+## [11.0.1](https://github.com/alanshaw/it-length-prefixed/compare/v11.0.0...v11.0.1) (2026-05-08)
+
+### Bug Fixes
+
+* add array buffer type to encoding return type ([#160](https://github.com/alanshaw/it-length-prefixed/issues/160)) ([dd4104c](https://github.com/alanshaw/it-length-prefixed/commit/dd4104c4ea1663b0e0badc747629e706ffcd06f4))
+
 ## [11.0.0](https://github.com/alanshaw/it-length-prefixed/compare/v10.0.2...v11.0.0) (2026-05-07)
 
 ### ⚠ BREAKING CHANGES
