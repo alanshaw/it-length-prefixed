@@ -26,15 +26,15 @@ const defaultEncoder: LengthEncoderFunction = (length) => {
 }
 defaultEncoder.bytes = 0
 
-export function encode (source: Iterable<Uint8ArrayList | Uint8Array>, options?: EncoderOptions): Generator<Uint8Array, void, undefined>
-export function encode (source: Source<Uint8ArrayList | Uint8Array>, options?: EncoderOptions): AsyncGenerator<Uint8Array, void, undefined>
-export function encode (source: Source<Uint8ArrayList | Uint8Array>, options?: EncoderOptions): Generator<Uint8Array, void, undefined> | AsyncGenerator<Uint8Array, void, undefined> {
+export function encode <T extends ArrayBufferLike = ArrayBufferLike> (source: Iterable<Uint8ArrayList<T> | Uint8Array<T>>, options?: EncoderOptions): Generator<Uint8Array<T | ArrayBuffer>, void, undefined>
+export function encode <T extends ArrayBufferLike = ArrayBufferLike> (source: Source<Uint8ArrayList<T> | Uint8Array<T>>, options?: EncoderOptions): AsyncGenerator<Uint8Array<T | ArrayBuffer>, void, undefined>
+export function encode <T extends ArrayBufferLike = ArrayBufferLike> (source: Source<Uint8ArrayList<T> | Uint8Array<T>>, options?: EncoderOptions): Generator<Uint8Array<T | ArrayBuffer>, void, undefined> | AsyncGenerator<Uint8Array<T | ArrayBuffer>, void, undefined> {
   options = options ?? {}
 
   const encodeLength = options.lengthEncoder ?? defaultEncoder
   const maxDataLength = options?.maxDataLength ?? MAX_DATA_LENGTH
 
-  function * maybeYield (chunk: Uint8Array | Uint8ArrayList): Generator<Uint8Array, void, undefined> {
+  function * maybeYield (chunk: Uint8Array<T> | Uint8ArrayList<T>): Generator<Uint8Array<T | ArrayBuffer>, void, undefined> {
     validateMaxDataLength(chunk, maxDataLength)
 
     // length + data

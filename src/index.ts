@@ -67,6 +67,6 @@ export interface EncoderOptions {
 }
 
 export interface LengthEncoderFunction {
-  (value: number): Uint8ArrayList | Uint8Array
+  (value: number): Uint8ArrayList<ArrayBuffer> | Uint8Array<ArrayBuffer>
   bytes: number
 }
